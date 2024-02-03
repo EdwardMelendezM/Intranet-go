@@ -25,7 +25,7 @@ func loginHandler(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 	if loginBody.Username == "usuario" && loginBody.Password == "contrasena" {
-		context.JSON(http.StatusOK, gin.H{"message": "Login exitoso"})
+		context.JSON(http.StatusOK, loginBody)
 	} else {
 		context.JSON(http.StatusUnauthorized, gin.H{"message": "Credenciales incorrectas"})
 	}
