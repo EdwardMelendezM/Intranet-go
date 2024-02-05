@@ -1,10 +1,9 @@
 package main
 
 import (
+	"auth/domain"
 	"github.com/gin-gonic/gin"
 	"net/http"
-
-	"auth/entities"
 )
 
 func main() {
@@ -19,7 +18,7 @@ func main() {
 }
 
 func loginHandler(context *gin.Context) {
-	var loginBody entities.LoginBody
+	var loginBody domain.LoginBody
 
 	if err := context.ShouldBindJSON(&loginBody); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
