@@ -7,6 +7,7 @@ type LoginBody struct {
 
 type LoginResponse struct {
 	Status       int
+	Error        *string
 	RefreshToken *string
 }
 
@@ -18,5 +19,6 @@ type RegisterBody struct {
 
 type RegisterResponse struct {
 	Status       int
+	Error        *string
 	RefreshToken *string
 }
