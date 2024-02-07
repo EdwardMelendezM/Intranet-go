@@ -9,11 +9,29 @@ import (
 func main() {
 	router := gin.Default()
 
+	router.Use(corsMiddleware())
+
 	router.POST("api/v1/login", loginHandler)
 
 	err := router.Run(":8080")
 	if err != nil {
 		return
+	}
+}
+
+// Función que crea el middleware CORS
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+
+		c.Next()
 	}
 }
 
